@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/collect-policies",
+      "schedule": "0 6 * * *"
+    }
+  ]
+}
