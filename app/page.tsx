@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { supabase, AIPolicy } from '@/lib/supabase'
-import { ExternalLink, Calendar, AlertTriangle, RefreshCw, Activity } from 'lucide-react'
+import { ExternalLink, Calendar, AlertTriangle, RefreshCw, Activity, Shield, FileText, Building2, TrendingUp, Database, Clock } from 'lucide-react'
 import { format } from 'date-fns'
 
 export default function Dashboard() {
@@ -340,23 +340,23 @@ export default function Dashboard() {
 
   const getRiskColor = (risk?: string) => {
     switch (risk) {
-      case 'Critical': return 'bg-red-100 text-red-800'
-      case 'High': return 'bg-orange-100 text-orange-800'
-      case 'Medium': return 'bg-yellow-100 text-yellow-800'
-      case 'Low': return 'bg-green-100 text-green-800'
-      default: return 'bg-gray-100 text-gray-800'
+      case 'Critical': return 'bg-red-50 text-red-900 border border-red-200 shadow-sm'
+      case 'High': return 'bg-orange-50 text-orange-900 border border-orange-200 shadow-sm'
+      case 'Medium': return 'bg-amber-50 text-amber-900 border border-amber-200 shadow-sm'
+      case 'Low': return 'bg-emerald-50 text-emerald-900 border border-emerald-200 shadow-sm'
+      default: return 'bg-slate-50 text-slate-700 border border-slate-200 shadow-sm'
     }
   }
 
   const getStatusColor = (status?: string) => {
     switch (status) {
-      case 'Enacted': return 'bg-green-100 text-green-800'
-      case 'Proposed': return 'bg-blue-100 text-blue-800'
-      case 'Under Review': return 'bg-yellow-100 text-yellow-800'
-      case 'Amended': return 'bg-purple-100 text-purple-800'
-      case 'Repealed': return 'bg-red-100 text-red-800'
-      case 'Expired': return 'bg-gray-100 text-gray-800'
-      default: return 'bg-gray-100 text-gray-800'
+      case 'Enacted': return 'bg-emerald-50 text-emerald-900 border border-emerald-200 shadow-sm'
+      case 'Proposed': return 'bg-blue-50 text-blue-900 border border-blue-200 shadow-sm'
+      case 'Under Review': return 'bg-amber-50 text-amber-900 border border-amber-200 shadow-sm'
+      case 'Amended': return 'bg-purple-50 text-purple-900 border border-purple-200 shadow-sm'
+      case 'Repealed': return 'bg-red-50 text-red-900 border border-red-200 shadow-sm'
+      case 'Expired': return 'bg-slate-50 text-slate-700 border border-slate-200 shadow-sm'
+      default: return 'bg-slate-50 text-slate-700 border border-slate-200 shadow-sm'
     }
   }
 
@@ -369,8 +369,8 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
-      {/* Add global styles for resizing */}
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
+      {/* Professional Government Styles */}
       <style dangerouslySetInnerHTML={{
         __html: `
           .resizing {
@@ -383,158 +383,183 @@ export default function Dashboard() {
           .resize-handle {
             background: transparent;
             border-right: 2px solid transparent;
+            transition: all 0.2s ease;
           }
           .resize-handle:hover {
-            border-right: 2px solid #60a5fa;
-            background: rgba(96, 165, 250, 0.1);
+            border-right: 2px solid #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
           }
           .resize-handle.active {
-            border-right: 2px solid #3b82f6;
-            background: rgba(59, 130, 246, 0.2);
+            border-right: 2px solid #1e40af;
+            background: rgba(30, 64, 175, 0.2);
+          }
+          .government-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(59, 130, 246, 0.05);
+          }
+          .government-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            backdrop-filter: blur(10px);
+          }
+          .government-header {
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
           }
         `
       }} />
-      {/* Header */}
-      <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
-          <h1 className="text-2xl font-semibold text-gray-900">AI Policy Dashboard</h1>
-          <p className="mt-2 text-sm text-gray-700">
-            Track and monitor AI policy developments worldwide
-          </p>
-        </div>
-        <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-          {process.env.NODE_ENV === 'development' && (
-            <button
-              onClick={triggerManualCollection}
-              disabled={refreshing}
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
-            >
-              {refreshing ? (
-                <>
-                  <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                  Collecting...
-                </>
-              ) : (
-                <>
-                  <Activity className="h-4 w-4 mr-2" />
-                  Collect Now
-                </>
+      {/* Professional Government Header */}
+      <div className="government-header shadow-sm">
+        <div className="px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
+            {/* Government Branding */}
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4">
+                <div className="h-12 w-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg">
+                  <Shield className="h-7 w-7 text-white" />
+                </div>
+                <div className="space-y-1">
+                  <h1 className="text-xl font-bold text-slate-900 tracking-tight">AI Policy Tracker</h1>
+                  <p className="text-xs text-slate-600 font-medium uppercase tracking-wide">Government Regulatory Intelligence</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Status and Controls */}
+            <div className="flex items-center space-x-6">
+              {collectionStatus && (
+                <div className="flex items-center space-x-2 text-sm">
+                  <div className="h-2.5 w-2.5 bg-emerald-500 rounded-full animate-pulse"></div>
+                  <span className="text-slate-600 font-medium">Live Collection Active</span>
+                </div>
               )}
-            </button>
-          )}
-        </div>
-      </div>
-
-
-      {/* Stats */}
-      <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="bg-white overflow-hidden shadow rounded-lg">
-          <div className="p-5">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <Calendar className="h-6 w-6 text-gray-400" />
-              </div>
-              <div className="ml-5 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
-                    Total Policies
-                  </dt>
-                  <dd className="text-lg font-medium text-gray-900">
-                    {policies.length}
-                  </dd>
-                </dl>
-              </div>
+              
+              {process.env.NODE_ENV === 'development' && (
+                <button
+                  onClick={triggerManualCollection}
+                  disabled={refreshing}
+                  className="inline-flex items-center px-4 py-2.5 border border-transparent text-sm font-semibold rounded-lg text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg transition-all duration-200 government-shadow"
+                >
+                  {refreshing ? (
+                    <>
+                      <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+                      Collecting...
+                    </>
+                  ) : (
+                    <>
+                      <Database className="h-4 w-4 mr-2" />
+                      Collect Now
+                    </>
+                  )}
+                </button>
+              )}
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg">
-          <div className="p-5">
+      {/* Main Content Container */}
+      <div className="px-4 sm:px-6 lg:px-8 py-8">
+        {/* Page Title Section */}
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">Policy Intelligence Dashboard</h2>
+          <p className="text-slate-600 text-lg">Real-time monitoring of AI regulatory developments from government sources worldwide</p>
+        </div>
+
+        {/* Professional Statistics Cards */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+          {/* Total Policies Card */}
+          <div className="government-card government-shadow rounded-xl p-6 transition-all duration-300 hover:shadow-xl group">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <div className="h-6 w-6 bg-green-100 rounded-full flex items-center justify-center">
-                  <div className="h-3 w-3 bg-green-500 rounded-full"></div>
+                <div className="h-14 w-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                  <FileText className="h-7 w-7 text-white" />
                 </div>
               </div>
-              <div className="ml-5 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
-                    Enacted
-                  </dt>
-                  <dd className="text-lg font-medium text-gray-900">
-                    {policies.filter(p => p.status === 'Enacted').length}
-                  </dd>
-                </dl>
+              <div className="ml-5 flex-1">
+                <p className="text-sm font-semibold text-slate-600 uppercase tracking-wider">Total Policies</p>
+                <p className="text-3xl font-bold text-slate-900 mt-2">{policies.length.toLocaleString()}</p>
+                <p className="text-xs text-slate-500 mt-1 font-medium">Across all jurisdictions</p>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg">
-          <div className="p-5">
+          {/* Enacted Policies Card */}
+          <div className="government-card government-shadow rounded-xl p-6 transition-all duration-300 hover:shadow-xl group">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <div className="h-6 w-6 bg-blue-100 rounded-full flex items-center justify-center">
-                  <div className="h-3 w-3 bg-blue-500 rounded-full"></div>
+                <div className="h-14 w-14 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                  <Shield className="h-7 w-7 text-white" />
                 </div>
               </div>
-              <div className="ml-5 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
-                    Proposed
-                  </dt>
-                  <dd className="text-lg font-medium text-gray-900">
-                    {policies.filter(p => p.status === 'Proposed').length}
-                  </dd>
-                </dl>
+              <div className="ml-5 flex-1">
+                <p className="text-sm font-semibold text-slate-600 uppercase tracking-wider">Enacted</p>
+                <p className="text-3xl font-bold text-slate-900 mt-2">{policies.filter(p => p.status === 'Enacted').length.toLocaleString()}</p>
+                <p className="text-xs text-slate-500 mt-1 font-medium">Active regulations</p>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg">
-          <div className="p-5">
+          {/* Proposed Policies Card */}
+          <div className="government-card government-shadow rounded-xl p-6 transition-all duration-300 hover:shadow-xl group">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <AlertTriangle className="h-6 w-6 text-red-400" />
+                <div className="h-14 w-14 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                  <Clock className="h-7 w-7 text-white" />
+                </div>
               </div>
-              <div className="ml-5 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
-                    High Risk
-                  </dt>
-                  <dd className="text-lg font-medium text-gray-900">
-                    {policies.filter(p => p.risk_classification === 'High' || p.risk_classification === 'Critical').length}
-                  </dd>
-                </dl>
+              <div className="ml-5 flex-1">
+                <p className="text-sm font-semibold text-slate-600 uppercase tracking-wider">Proposed</p>
+                <p className="text-3xl font-bold text-slate-900 mt-2">{policies.filter(p => p.status === 'Proposed').length.toLocaleString()}</p>
+                <p className="text-xs text-slate-500 mt-1 font-medium">Under consideration</p>
+              </div>
+            </div>
+          </div>
+
+          {/* High Risk Policies Card */}
+          <div className="government-card government-shadow rounded-xl p-6 transition-all duration-300 hover:shadow-xl group">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <div className="h-14 w-14 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                  <AlertTriangle className="h-7 w-7 text-white" />
+                </div>
+              </div>
+              <div className="ml-5 flex-1">
+                <p className="text-sm font-semibold text-slate-600 uppercase tracking-wider">High Risk</p>
+                <p className="text-3xl font-bold text-slate-900 mt-2">{policies.filter(p => p.risk_classification === 'High' || p.risk_classification === 'Critical').length.toLocaleString()}</p>
+                <p className="text-xs text-slate-500 mt-1 font-medium">Critical impact policies</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      {/* Column Visibility Controls */}
-      <div className="mt-8 mb-4">
-        <details className="bg-gray-50 rounded-lg p-4">
-          <summary className="cursor-pointer text-sm font-medium text-gray-700 hover:text-gray-900">
-            🔧 Column Visibility ({Object.values(visibleColumns).filter(Boolean).length}/{Object.keys(visibleColumns).length} shown)
-          </summary>
-          <div className="mt-3 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-            {Object.entries(visibleColumns).map(([key, visible]) => (
-              <label key={key} className="flex items-center space-x-2 text-sm">
-                <input
-                  type="checkbox"
-                  checked={visible}
-                  onChange={(e) => setVisibleColumns(prev => ({ ...prev, [key]: e.target.checked }))}
-                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <span className="text-gray-700 capitalize">
-                  {key.replace(/_/g, ' ')}
-                </span>
-              </label>
-            ))}
-          </div>
-        </details>
-      </div>
+        {/* Professional Column Configuration */}
+        <div className="mb-8">
+          <details className="government-card government-shadow rounded-xl p-6">
+            <summary className="cursor-pointer flex items-center justify-between text-sm font-semibold text-slate-700 hover:text-slate-900 transition-colors duration-200">
+              <div className="flex items-center space-x-3">
+                <TrendingUp className="h-5 w-5 text-blue-600" />
+                <span className="text-base">Table Configuration</span>
+              </div>
+              <span className="text-xs bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full border border-blue-200 font-medium">
+                {Object.values(visibleColumns).filter(Boolean).length}/{Object.keys(visibleColumns).length} columns visible
+              </span>
+            </summary>
+            <div className="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {Object.entries(visibleColumns).map(([key, visible]) => (
+                <label key={key} className="flex items-center space-x-3 text-sm cursor-pointer hover:bg-slate-50 p-3 rounded-lg transition-colors duration-200 border border-transparent hover:border-slate-200">
+                  <input
+                    type="checkbox"
+                    checked={visible}
+                    onChange={(e) => setVisibleColumns(prev => ({ ...prev, [key]: e.target.checked }))}
+                    className="rounded border-slate-300 text-blue-600 focus:ring-blue-500 focus:ring-offset-0 h-4 w-4"
+                  />
+                  <span className="text-slate-700 font-medium capitalize">
+                    {key.replace(/_/g, ' ')}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </details>
+        </div>
 
       {/* Resizable Table */}
       <div className="mt-8 flow-root">
@@ -615,6 +640,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }
